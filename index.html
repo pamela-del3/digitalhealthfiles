@@ -3,23 +3,441 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>GOOGLE</title>
+  <title>MediRecord – Patient Intake (Demo)</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="wrapper">
-    <header class="main-head">The header</header>
-    <nav class="main-nav">
-      <ul>
-        <li>Home</li>
-        <li>About</li>
-        <li>Contact</li>
-      </ul>
-    </nav>
-    <article class="content">Content</article>
-    <aside class="side">Sidebar</aside>
-    <div class="ad">Advertising</div>
-    <footer class="main-footer">The footer</footer>
-  </div>
+<div class="wrapper">
+
+  <!-- Top bar -->
+  <header class="main-head">
+    <div class="brand"><span class="logo">+</span> MediRecord <small>Demo EHR</small></div>
+    <input class="search" type="search" placeholder="Search patient by name or ID…" aria-label="Search patient">
+    <div class="user">Dr. Example</div>
+  </header>
+
+  <!-- Section navigation -->
+  <nav class="main-nav" aria-label="Form sections">
+    <ul>
+      <li><a href="#demographics">1 · Patient details</a></li>
+      <li><a href="#vitals">2 · Vitals</a></li>
+      <li><a href="#allergies">3 · Allergies</a></li>
+      <li><a href="#medications">4 · Medications</a></li>
+      <li><a href="#history">5 · History</a></li>
+      <li><a href="#notes">6 · Visit notes</a></li>
+    </ul>
+  </nav>
+
+  <!-- Main form -->
+  <article class="content">
+    <div class="page-title">
+      <h1>New patient intake</h1>
+      <p>Fields marked <span class="req-mark">*</span> are required. This is a demo: please do not enter real patient data.</p>
+    </div>
+
+    <form id="patient-form">
+
+      <section class="card" id="demographics">
+        <h2><span class="num">1</span> Patient details</h2>
+        <div class="fields">
+          <div class="field">
+            <label class="req" for="first-name">First name</label>
+            <input id="first-name" type="text" required autocomplete="off">
+          </div>
+          <div class="field">
+            <label class="req" for="last-name">Last name</label>
+            <input id="last-name" type="text" required autocomplete="off">
+          </div>
+          <div class="field">
+            <label class="req" for="dob">Date of birth</label>
+            <input id="dob" type="date" required>
+          </div>
+          <div class="field">
+            <label for="age">Age (calculated)</label>
+            <input id="age" type="text" readonly placeholder="–">
+          </div>
+          <div class="field">
+            <label class="req" for="sex">Sex</label>
+            <select id="sex" required>
+              <option value="">Select…</option>
+              <option>Female</option>
+              <option>Male</option>
+              <option>Intersex</option>
+              <option>Prefer not to say</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="patient-id">Patient ID</label>
+            <input id="patient-id" type="text" readonly value="Assigned on save">
+          </div>
+          <div class="field">
+            <label for="phone">Phone</label>
+            <input id="phone" type="tel" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" type="email" autocomplete="off">
+          </div>
+          <div class="field wide">
+            <label for="address">Address</label>
+            <input id="address" type="text" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="insurance">Insurance type</label>
+            <select id="insurance">
+              <option value="">Select…</option>
+              <option>Statutory (GKV)</option>
+              <option>Private (PKV)</option>
+              <option>Self-pay</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="insurance-no">Insurance number</label>
+            <input id="insurance-no" type="text" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="emergency-name">Emergency contact</label>
+            <input id="emergency-name" type="text" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="emergency-phone">Emergency phone</label>
+            <input id="emergency-phone" type="tel" autocomplete="off">
+          </div>
+        </div>
+      </section>
+
+      <section class="card" id="vitals">
+        <h2><span class="num">2</span> Vitals</h2>
+        <div class="fields">
+          <div class="field wide">
+            <label for="measured-at">Measured at</label>
+            <input id="measured-at" type="datetime-local">
+          </div>
+          <div class="field">
+            <label for="height">Height (cm)</label>
+            <input id="height" type="number" min="30" max="250" step="0.1">
+          </div>
+          <div class="field">
+            <label for="weight">Weight (kg)</label>
+            <input id="weight" type="number" min="1" max="400" step="0.1">
+          </div>
+          <div class="field">
+            <label for="bmi">BMI (calculated)</label>
+            <input id="bmi" type="text" readonly placeholder="–">
+          </div>
+          <div class="field">
+            <label for="sys">Systolic BP (mmHg)</label>
+            <input id="sys" type="number" min="40" max="300">
+          </div>
+          <div class="field">
+            <label for="dia">Diastolic BP (mmHg)</label>
+            <input id="dia" type="number" min="20" max="200">
+          </div>
+          <div class="field">
+            <label for="hr">Heart rate (bpm)</label>
+            <input id="hr" type="number" min="20" max="250">
+          </div>
+          <div class="field">
+            <label for="temp">Temperature (°C)</label>
+            <input id="temp" type="number" min="30" max="45" step="0.1">
+          </div>
+          <div class="field">
+            <label for="spo2">SpO₂ (%)</label>
+            <input id="spo2" type="number" min="50" max="100">
+          </div>
+        </div>
+      </section>
+
+      <section class="card" id="allergies">
+        <h2><span class="num">3</span> Allergies</h2>
+        <label class="check"><input type="checkbox" id="nka"> No known allergies</label>
+        <div class="inline-add">
+          <input id="allergy-input" type="text" placeholder="e.g. Penicillin – rash" aria-label="Allergy">
+          <button type="button" id="add-allergy" class="btn secondary">Add allergy</button>
+        </div>
+        <div id="allergy-list" class="chips"></div>
+      </section>
+
+      <section class="card" id="medications">
+        <h2><span class="num">4</span> Current medications</h2>
+        <div id="med-list"></div>
+        <button type="button" id="add-med" class="btn secondary">+ Add medication</button>
+      </section>
+
+      <section class="card" id="history">
+        <h2><span class="num">5</span> Medical history</h2>
+        <fieldset>
+          <legend>Existing conditions</legend>
+          <div class="checks">
+            <label class="check"><input type="checkbox" name="condition"> Type 2 diabetes</label>
+            <label class="check"><input type="checkbox" name="condition"> Hypertension</label>
+            <label class="check"><input type="checkbox" name="condition"> Cardiovascular disease</label>
+            <label class="check"><input type="checkbox" name="condition"> Chronic kidney disease</label>
+            <label class="check"><input type="checkbox" name="condition"> Asthma / COPD</label>
+            <label class="check"><input type="checkbox" name="condition"> Cancer</label>
+          </div>
+        </fieldset>
+        <div class="fields">
+          <div class="field">
+            <label for="smoking">Smoking</label>
+            <select id="smoking">
+              <option value="">Select…</option>
+              <option>Never</option>
+              <option>Former</option>
+              <option>Current</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="alcohol">Alcohol</label>
+            <select id="alcohol">
+              <option value="">Select…</option>
+              <option>None</option>
+              <option>Occasional</option>
+              <option>Regular</option>
+            </select>
+          </div>
+          <div class="field wide">
+            <label for="history-details">Other conditions, surgeries, family history</label>
+            <textarea id="history-details" rows="3"></textarea>
+          </div>
+        </div>
+      </section>
+
+      <section class="card" id="notes">
+        <h2><span class="num">6</span> Visit notes</h2>
+        <div class="fields">
+          <div class="field wide">
+            <label class="req" for="reason">Reason for visit</label>
+            <input id="reason" type="text" required autocomplete="off">
+          </div>
+          <div class="field wide">
+            <label for="visit-notes">Notes</label>
+            <textarea id="visit-notes" rows="5"></textarea>
+          </div>
+        </div>
+      </section>
+
+    </form>
+  </article>
+
+  <!-- Live patient summary -->
+  <aside class="side">
+    <div class="card summary">
+      <div class="patient-head">
+        <div class="avatar" id="avatar">?</div>
+        <div>
+          <div class="sum-name" id="sum-name">New patient</div>
+          <div class="muted">ID assigned on save</div>
+        </div>
+      </div>
+      <dl class="sum-list">
+        <dt>Age</dt><dd id="sum-age">–</dd>
+        <dt>Sex</dt><dd id="sum-sex">–</dd>
+        <dt>BMI</dt><dd id="sum-bmi">–</dd>
+        <dt>Blood pressure</dt><dd id="sum-bp">–</dd>
+        <dt>Heart rate</dt><dd id="sum-hr">–</dd>
+        <dt>Medications</dt><dd id="sum-meds">0</dd>
+      </dl>
+      <h3>Allergies</h3>
+      <div id="sum-allergies" class="chips"></div>
+    </div>
+
+    <div class="card">
+      <h3>Form progress</h3>
+      <div class="progress"><div id="progress-bar"></div></div>
+      <p class="muted" id="progress-text"></p>
+    </div>
+  </aside>
+
+  <!-- Sticky action bar -->
+  <footer class="main-footer">
+    <span class="muted">Demo mode: nothing is saved or sent anywhere.</span>
+    <div class="actions">
+      <button type="button" id="clear" class="btn secondary">Clear form</button>
+      <button type="button" id="print" class="btn secondary">Print</button>
+      <button type="submit" form="patient-form" class="btn primary">Save patient record</button>
+    </div>
+  </footer>
+
+</div>
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<script>
+  const $ = (id) => document.getElementById(id);
+  const form = $("patient-form");
+  let allergies = [];
+
+  /* ---------- Calculations ---------- */
+  function calcAge() {
+    const v = $("dob").value;
+    if (!v) { $("age").value = ""; return; }
+    const dob = new Date(v), now = new Date();
+    if (dob > now) { $("age").value = ""; return; }
+    let age = now.getFullYear() - dob.getFullYear();
+    const m = now.getMonth() - dob.getMonth();
+    if (m < 0 || (m === 0 && now.getDate() < dob.getDate())) age--;
+    $("age").value = age;
+  }
+
+  function calcBmi() {
+    const h = parseFloat($("height").value) / 100;
+    const w = parseFloat($("weight").value);
+    $("bmi").value = (h > 0 && w > 0) ? (w / (h * h)).toFixed(1) : "";
+  }
+
+  /* ---------- Allergies ---------- */
+  function makeChip(text, index) {
+    const chip = document.createElement("span");
+    chip.className = "chip";
+    chip.textContent = text;
+    if (index !== undefined) {
+      const x = document.createElement("button");
+      x.type = "button";
+      x.className = "chip-x";
+      x.setAttribute("aria-label", "Remove " + text);
+      x.textContent = "×";
+      x.addEventListener("click", () => { allergies.splice(index, 1); renderAllergies(); });
+      chip.appendChild(x);
+    }
+    return chip;
+  }
+
+  function renderAllergies() {
+    const list = $("allergy-list"), sum = $("sum-allergies");
+    list.replaceChildren();
+    sum.replaceChildren();
+    if ($("nka").checked) {
+      const t = document.createElement("span");
+      t.className = "muted";
+      t.textContent = "No known allergies";
+      sum.appendChild(t);
+    } else if (allergies.length === 0) {
+      const t = document.createElement("span");
+      t.className = "muted";
+      t.textContent = "None recorded";
+      sum.appendChild(t);
+    } else {
+      allergies.forEach((a, i) => {
+        list.appendChild(makeChip(a, i));
+        sum.appendChild(makeChip(a));
+      });
+    }
+  }
+
+  function addAllergy() {
+    const input = $("allergy-input");
+    const v = input.value.trim();
+    if (v && !$("nka").checked) {
+      allergies.push(v);
+      input.value = "";
+      renderAllergies();
+    }
+    input.focus();
+  }
+
+  /* ---------- Medications ---------- */
+  function addMedRow() {
+    const row = document.createElement("div");
+    row.className = "med-row";
+    row.innerHTML =
+      '<input type="text" name="med-name" placeholder="Medication" aria-label="Medication">' +
+      '<input type="text" placeholder="Dose (e.g. 500 mg)" aria-label="Dose">' +
+      '<input type="text" placeholder="Frequency (e.g. 2x daily)" aria-label="Frequency">' +
+      '<button type="button" class="btn icon" aria-label="Remove medication">✕</button>';
+    row.querySelector("button").addEventListener("click", () => { row.remove(); refresh(); });
+    $("med-list").appendChild(row);
+  }
+
+  function resetMeds() {
+    $("med-list").replaceChildren();
+    addMedRow();
+  }
+
+  /* ---------- Summary and progress ---------- */
+  function updateSummary() {
+    const first = $("first-name").value.trim();
+    const last = $("last-name").value.trim();
+    $("sum-name").textContent = (first || last) ? (first + " " + last).trim() : "New patient";
+    $("avatar").textContent = ((first[0] || "") + (last[0] || "")).toUpperCase() || "?";
+    $("sum-age").textContent = $("age").value || "–";
+    $("sum-sex").textContent = $("sex").value || "–";
+    $("sum-bmi").textContent = $("bmi").value || "–";
+    const sys = $("sys").value, dia = $("dia").value;
+    $("sum-bp").textContent = (sys && dia) ? sys + "/" + dia + " mmHg" : "–";
+    $("sum-hr").textContent = $("hr").value ? $("hr").value + " bpm" : "–";
+    const meds = Array.from(document.querySelectorAll('#med-list input[name="med-name"]'))
+      .filter((i) => i.value.trim() !== "").length;
+    $("sum-meds").textContent = meds;
+  }
+
+  function updateProgress() {
+    const required = Array.from(form.querySelectorAll("[required]"));
+    const filled = required.filter((el) => el.value.trim() !== "").length;
+    const pct = required.length ? Math.round((filled / required.length) * 100) : 0;
+    $("progress-bar").style.width = pct + "%";
+    $("progress-text").textContent = filled + " of " + required.length + " required fields completed";
+  }
+
+  function refresh() {
+    updateSummary();
+    updateProgress();
+  }
+
+  /* ---------- Toast ---------- */
+  let toastTimer;
+  function showToast(msg) {
+    const t = $("toast");
+    t.textContent = msg;
+    t.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => t.classList.remove("show"), 3500);
+  }
+
+  /* ---------- Events ---------- */
+  form.addEventListener("input", (e) => {
+    if (e.target.id === "dob") calcAge();
+    if (e.target.id === "height" || e.target.id === "weight") calcBmi();
+    refresh();
+  });
+  form.addEventListener("change", refresh);
+
+  $("add-allergy").addEventListener("click", addAllergy);
+  $("allergy-input").addEventListener("keydown", (e) => {
+    if (e.key === "Enter") { e.preventDefault(); addAllergy(); }
+  });
+  $("nka").addEventListener("change", () => {
+    $("allergy-input").disabled = $("nka").checked;
+    $("add-allergy").disabled = $("nka").checked;
+    renderAllergies();
+  });
+
+  $("add-med").addEventListener("click", addMedRow);
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    showToast("Demo only: nothing was saved or sent.");
+  });
+
+  $("clear").addEventListener("click", () => {
+    if (!confirm("Clear all fields?")) return;
+    form.reset();
+    allergies = [];
+    $("allergy-input").disabled = false;
+    $("add-allergy").disabled = false;
+    renderAllergies();
+    resetMeds();
+    refresh();
+  });
+
+  $("print").addEventListener("click", () => window.print());
+
+  /* ---------- Start-up ---------- */
+  $("dob").max = new Date().toISOString().split("T")[0];
+  resetMeds();
+  renderAllergies();
+  refresh();
+</script>
 </body>
 </html>
